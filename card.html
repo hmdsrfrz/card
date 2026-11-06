@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Mehndi Card</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Great+Vibes&family=Jost:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&display=swap" rel="stylesheet">
+<style>
+:root{--green-900:#0a2219;--green-800:#0d2b20;--green-700:#13402f;--marigold:#f59e1b;--turmeric:#f7c948;--gold:#e9c46a;--cream:#fff6e3}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1350px;background:var(--green-900)}
+.card{position:relative;width:1080px;height:1350px;overflow:hidden;color:var(--cream);font-family:"Jost",sans-serif;text-align:center}
+.bg{position:absolute;inset:0;background:
+  radial-gradient(120% 60% at 50% 110%,rgba(245,158,27,.38),transparent 60%),
+  radial-gradient(90% 50% at 50% -10%,rgba(214,51,108,.25),transparent 60%),
+  linear-gradient(180deg,var(--green-900),var(--green-800) 45%,var(--green-700))}
+.mandala{position:absolute;width:1500px;height:1500px;left:-210px;top:-90px;opacity:.055}
+.garland{position:absolute;top:0;left:0;width:1080px;height:250px}
+.lights{position:absolute;top:150px;left:0;width:1080px;height:150px;opacity:.9}
+.scene{position:absolute;left:0;bottom:0;width:1080px;height:330px}
+.content{position:absolute;left:0;right:0;top:268px;display:flex;flex-direction:column;align-items:center}
+.arabic{font:700 50px/1.4 "Amiri",serif;color:var(--gold);direction:rtl}
+.eyebrow{margin-top:34px;font:500 24px/1 "Jost",sans-serif;letter-spacing:.42em;padding-left:.42em;text-transform:uppercase;color:var(--turmeric)}
+.names{margin-top:28px;font:400 134px/1 "Great Vibes",cursive;background:linear-gradient(180deg,#fff2c2,#f7c948 55%,#e2711d);-webkit-background-clip:text;background-clip:text;color:transparent;padding:0 30px 16px}
+.amp{display:block;font-size:64px;line-height:1.05}
+.divider{display:flex;align-items:center;gap:18px;margin:8px auto 24px;color:var(--turmeric);font-size:26px}
+.divider::before,.divider::after{content:"";width:120px;height:1.5px;background:linear-gradient(90deg,transparent,var(--turmeric))}
+.divider::after{transform:scaleX(-1)}
+.glass{width:720px;padding:32px 40px 34px;border-radius:30px;background:rgba(8,28,20,.78);border:1.5px solid rgba(247,201,72,.35);box-shadow:0 30px 70px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.08)}
+.date{font:italic 700 54px/1.15 "Playfair Display",serif}
+.time{margin-top:14px;font:600 30px/1 "Jost",sans-serif;letter-spacing:.06em}
+.line{width:70px;height:1.5px;background:rgba(247,201,72,.5);margin:20px auto}
+.venue{font:500 32px/1.3 "Playfair Display",serif}
+.venue small{display:block;margin-top:10px;font:500 20px/1 "Jost",sans-serif;letter-spacing:.32em;text-transform:uppercase;color:var(--turmeric)}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="bg"></div>
+  <svg class="mandala" viewBox="-100 -100 200 200" id="mandala"></svg>
+  <svg class="lights" id="lights"></svg>
+  <svg class="garland" id="garland"></svg>
+  <svg class="scene" id="scene" viewBox="0 0 1080 330"></svg>
+  <div class="content">
+    <div class="arabic">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
+    <div class="eyebrow">Mehndi</div>
+    <div class="names">Jugdashah<span class="amp">&amp;</span>Danbutt</div>
+    <div class="divider">✿</div>
+    <div class="glass">
+      <div class="date">Saturday, 7 November</div>
+      <div class="time">12:00 PM to 7:00 PM</div>
+      <div class="line"></div>
+      <div class="venue">Bahria Town Phase 3<small>Venue</small></div>
+    </div>
+  </div>
+</div>
+<script>
+const gold = "#f7c948";
+(() => {
+  let g = ""; const ring = (n, f) => { for (let i = 0; i < n; i++) g += `<g transform="rotate(${i*360/n})">${f()}</g>`; };
+  g += `<circle r="12" fill="none" stroke="${gold}" stroke-width="1"/><circle r="5" fill="${gold}"/>`;
+  ring(8, () => `<path d="M0-14 C6-22 6-32 0-40 C-6-32 -6-22 0-14Z" fill="none" stroke="${gold}" stroke-width="1"/>`);
+  g += `<circle r="44" fill="none" stroke="${gold}" stroke-width=".8" stroke-dasharray="2 3"/>`;
+  ring(16, () => `<path d="M0-46 C8-54 8-64 0-72 C-8-64 -8-54 0-46Z" fill="none" stroke="${gold}" stroke-width="1"/><circle cy="-59" r="2" fill="${gold}"/>`);
+  g += `<circle r="76" fill="none" stroke="${gold}" stroke-width="1"/>`;
+  ring(32, () => `<path d="M0-78 Q5-86 0-94 Q-5-86 0-78Z" fill="${gold}" opacity=".8"/><circle cy="-97" r="1.6" fill="${gold}"/>`);
+  document.getElementById("mandala").innerHTML = g;
+})();
+
+const marigold = (x, y, r, c1 = "#f59e1b", c2 = "#e2711d") =>
+  `<g transform="translate(${x} ${y})"><circle r="${r}" fill="${c2}"/><circle r="${r*.8}" fill="${c1}"/><circle r="${r*.5}" fill="#f7c948"/><circle r="${r*.22}" fill="${c2}"/></g>`;
+
+(() => {
+  const W = 1080, s = document.getElementById("garland"); s.setAttribute("viewBox", `0 0 ${W} 250`);
+  let g = "", leaves = ""; const swags = 3, sw = W / swags;
+  for (let i = 0; i < 26; i++) { const x = i * 43 + 10; leaves += `<ellipse cx="${x}" cy="12" rx="22" ry="8" fill="#2f7a4f" transform="rotate(${i%2?20:-20} ${x} 12)"/>`; }
+  const strand = x => { let h = ""; for (let k = 0; k < 6; k++) h += marigold(x, 30 + k * 32, 13, k%2 ? "#f7c948" : "#f59e1b"); return h + `<path d="M${x-6} 214 h12 l-6 20z" fill="#e9c46a"/>`; };
+  g += strand(10);
+  for (let sIdx = 0; sIdx < swags; sIdx++) {
+    const x0 = sIdx * sw;
+    for (let i = 0; i <= 22; i++) { const t = i / 22; g += marigold(x0 + t * sw, 16 + Math.sin(t * Math.PI) * 130, 17, i%5===0 ? "#d6336c" : "#f59e1b", i%5===0 ? "#a61e4d" : "#e2711d"); }
+    g += strand(sIdx === swags - 1 ? W - 10 : x0 + sw);
+  }
+  s.innerHTML = leaves + g;
+})();
+
+(() => {
+  const s = document.getElementById("lights"); s.setAttribute("viewBox", "0 0 1080 150");
+  let g = `<path d="M0 20 Q270 100 540 36 T1080 24" fill="none" stroke="rgba(255,240,200,.3)" stroke-width="1.5"/><path d="M0 60 Q300 140 580 80 T1080 60" fill="none" stroke="rgba(255,240,200,.22)" stroke-width="1.5"/>`;
+  for (let i = 0; i < 40; i++) {
+    const x = i * 27 + 6, y1 = 20 + Math.sin(i/40*Math.PI*2.2) * 34 + 26, y2 = 66 + Math.sin(i/40*Math.PI*2+1) * 30 + 18;
+    g += `<circle cx="${x}" cy="${y1}" r="${i%3?4:5}" fill="#ffe7a3" opacity="${i%4?1:.55}" style="filter:drop-shadow(0 0 6px #ffcc66)"/>`;
+    g += `<circle cx="${x+13}" cy="${y2}" r="3.2" fill="#ffd27a" opacity="${i%3?.9:.5}"/>`;
+  }
+  s.innerHTML = g;
+})();
+
+(() => {
+  let g = `<ellipse cx="540" cy="360" rx="720" ry="140" fill="#06140e" opacity=".85"/>`;
+  for (let i = 0; i < 7; i++) {
+    const x = 540 + (i - 3) * 120, y = 292 - Math.abs(i - 3) * 8;
+    g += `<g transform="translate(${x} ${y})"><circle cy="-46" r="36" fill="#ffcc66" opacity=".16"/>
+      <path d="M-30 0 h60 l-6 -30 h-48z" fill="#c9a227"/><ellipse cx="0" cy="0" rx="32" ry="9" fill="#8a5414"/>
+      <path d="M0 -34 C13 -48 8 -66 0 -82 C-8 -66 -13 -48 0 -34Z" fill="#ffcc4d"/>
+      <path d="M0 -36 C5 -44 4 -54 0 -62 C-4 -54 -5 -44 0 -36Z" fill="#fff3c4"/></g>`;
+  }
+  for (let i = 0; i < 16; i++) {
+    const pink = i % 3 === 0;
+    g += marigold(30 + i * 68, 322 - (i % 2) * 12, 20, pink ? "#d6336c" : "#f59e1b", pink ? "#a61e4d" : "#e2711d");
+  }
+  document.getElementById("scene").innerHTML = g;
+})();
+</script>
+</body>
+</html>
